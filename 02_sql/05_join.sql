@@ -1,19 +1,28 @@
 use hr_join;
+-- 주문이 들어왔을 때 고객/주문/제품 테이블 중 어떤 주문이 들어왔는지 주문 테이블에서 확인, 고객 테이블에서 고객 정보 확인, 어떤 제품인지 제품 테이블에서 확인 총 3번이나 걸쳐 확인해야 하기 때문에 조인하여 확인
+-- 정보가 중복되지 않도록
+-- 다중성 
+-- 부모쪽에서의 다중성 표시는 부모의 키가 널값을 가질 수도 있다는 것
 
+select * from emp where emp_id = 101;
+select * from dept where dept_id = 90;
+
+select * from job where job_id = 'AD_VP';
+select * from emp where emp_id = 100;
 /* ********************************************************************************
 조인(JOIN) 이란
 - 2개 이상의 테이블에 있는 컬럼들을 합쳐서 가상의 테이블을 만들어 조회하는 방식을 말한다.
- 	- 소스테이블 : 내가 먼저 읽어야 한다고 생각하는 테이블
+ 	- 소스테이블 : 내가 먼저 읽어야 한다고 생각하는 테이블(메인)
 	- 타겟테이블 : 소스를 읽은 후 소스에 조인할 대상이 되는 테이블
  
 - 각 테이블을 어떻게 합칠지를 표현하는 것을 조인 연산이라고 한다.
     - 조인 연산에 따른 조인종류
-        - Equi join , non-equi join
+        - Equi join(PK-FK 조인) , non-equi join(비교 연산, 업무적인 조인)
 - 조인의 종류
     - Inner Join 
-        - 양쪽 테이블에서 조인 조건을 만족하는 행들만 합친다. 
+        - 양쪽 테이블에서 '조인 조건을 만족하는 행들만' 합친다. 
     - Outer Join
-        - 한쪽 테이블의 행들을 모두 사용하고 다른 쪽 테이블은 조인 조건을 만족하는 행만 합친다. 조인조건을 만족하는 행이 없는 경우 NULL을 합친다.
+        - 한쪽 테이블의 행들을 모두 사용하고 다른 쪽 테이블은 조인 조건을 만족하는 행만 합친다. '조인조건을 만족하는 행이 없는 경우 NULL'을 합친다.
         - 종류 : Left Outer Join,  Right Outer Join, Full Outer Join
     - Cross Join
         - 두 테이블의 곱집합을 반환한다. 
@@ -41,7 +50,6 @@ order by e.emp_id desc;
 
 
 -- 직원의 ID(emp.emp_id)가 100인 직원의 직원_ID(emp.emp_id), 이름(emp.emp_name), 입사년도(emp.hire_date), 소속부서이름(dept.dept_name)을 조회.
-
 select e.emp_id, e.emp_name, e.hire_date, d.dept_name
 from   emp e join dept d on e.dept_id = d.dept_id
 where  e.emp_id = 100;
@@ -52,7 +60,7 @@ from   emp e join job j on e.job_id = j.job_id
              join dept d on e.dept_id = d.dept_id
 where e.emp_id = 200;
 
--- 부서_ID(dept.dept_id)가 30인 부서의 이름(dept.dept_name), 위치(dept.loc), 그 부서에 소속된 직원의 이름(emp.emp_name)을 조회.
+-- 부서_ID(dept.dept_id)가 30인 부서의 이름(dept.dept_name), 위치(dept.loc), 그 부서에 소속된 직원의 이름(emp.emp_name)을 조회.  -- inner join은 table 이름 순서 상관 없음
 select d.dept_name, d.loc, e.emp_name
 from   dept d join emp e on d.dept_id = e.dept_id
 where  d.dept_id = 30;
@@ -95,7 +103,7 @@ select e.emp_id,
 	   e.emp_name "직원이름",
        m.emp_name "상사이름"
 from   emp e join emp m on e.mgr_id = m.emp_id;
-
+-- e : 직원, m : 상사
 
 
 /* ****************************************************************************
@@ -135,7 +143,7 @@ where e.emp_id in (100, 110, 120, 130, 140);
 
 -- 부서 ID(dept.dept_id), 부서이름(dept.dept_name)과 그 부서에 속한 직원들의 수를 조회. 
 -- 직원이 없는 부서는 0이 나오도록 조회하고 직원수가 많은 부서 순서로 조회.
-select d.dept_id, d.dept_name, count(emp_id) "직원수"  -- 직원수-> 내가 세려고 하는 데이터 테이블의 PK로 count
+select d.dept_id, d.dept_name, count(emp_id) "직원수"  -- 직원수-> 내가 세려고 하는 데이터 테이블의 PK로 count / select count(*) => 행을 1로 세어서 1이 잡힘
 from   dept d left join emp e on d.dept_id = e.dept_id
 group by d.dept_id, d.dept_name
 order by 3 desc;
@@ -154,7 +162,7 @@ where  e.dept_id = 90;
 
 
 -- 2003년~2005년 사이에 입사한 모든 직원의 id(emp.emp_id), 이름(emp.emp_name), 업무명(job.job_title), 급여(emp.salary), 
--- 입사일(emp.hire_date),상사이름(emp.emp_name), 상사의입사일(emp.hire_date), 소속부서이름(dept.dept_name), 부서위치(dept.loc)를 조회.
+-- 입사일(emp.hire_date), 상사이름(emp.emp_name), 상사의입사일(emp.hire_date), 소속부서이름(dept.dept_name), 부서위치(dept.loc)를 조회.
 
 select  e.emp_id,
 		e.emp_name,

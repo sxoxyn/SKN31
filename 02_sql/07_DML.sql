@@ -1,9 +1,8 @@
-
 /* *********************************************************************
 UPDATE : 테이블의 컬럼의 값을 수정
 UPDATE 테이블명
 SET    변경할 컬럼 = 변경할 값  [, 변경할 컬럼 = 변경할 값]
-[WHERE 제약조건]
+[WHERE 제약조건] -- 없으면 다 바꿈
 
  - UPDATE: 변경할 테이블 지정
  - SET: 변경할 컬럼과 값을 지정
@@ -37,7 +36,7 @@ where dept_id = 100;
 
 
 /* *********************************************************************
-DELETE : 테이블의 행을 삭제
+DELETE : 테이블의 '행'을 삭제 (insert, update 등 나머지는 컬럼 단위 처리)
 구문 
  - DELETE FROM 테이블명 [WHERE 제약조건]
    - WHERE: 삭제할 행을 선택
@@ -62,6 +61,7 @@ delete from emp where job_id = 'SA_MAN' and salary <= 12000;
 select * from emp where comm_pct is null and job_id = 'IT_PROG';
 
 delete from emp where comm_pct is null and job_id = 'IT_PROG';
+
 
 
 
