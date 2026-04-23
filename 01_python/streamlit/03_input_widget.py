@@ -4,6 +4,8 @@ import numpy as np
 
 st.set_page_config(page_title="Input Widget", layout="wide")
 
+# 상호작용하는 위젯에 값 입력('이벤트') 시 코드를 처음부터 끝까지 다시 실행(어떤 변화인지 감지 못하기 때문)
+
 ################################################################
 # 위젯(Widget): 버튼, 텍스트박스 등과 같이 사용자가 직접 상호작용하는 개별 GUI 구성요소.
 # 컨테이너(Container): 여러 위젯을 포함하고 배치(layout)/정렬을 관리하는 GUI 구성요소.
@@ -12,8 +14,9 @@ st.set_page_config(page_title="Input Widget", layout="wide")
 ################################################################
 st.subheader("text 입력")
 name_value = st.text_input("이름")
-st.write("이름: " + name_value)
-
+if name_value != "": # 이름 입력이 없다면 "이름 : " 숨기고 있기
+    st.write("이름 : " + name_value)
+ 
 st.subheader("여러줄 텍스트 입력")
 info = st.text_area("정보", height=200)  #height: pixcel
 st.write(info.replace("\n", "<br>"), unsafe_allow_html=True)
@@ -63,15 +66,16 @@ st.subheader("Select Box")
 option = st.selectbox(
     "지역을 선택하세요",
     ("서울", "인천", "부산", "광주"),
-    # index=None
+    # index=None : 첫 번째 index 나옴(ex. index=3 => 광주)
 )
-st.write("**선택한 지역**:", option)
+st.write("**선택한 지역** :", option)
 
 ###### checkbox
 st.subheader("Checkbox")
 @st.cache_data
 def get_data():
-    df = pd.read_csv("data/boston_housing.csv").head(10)
+    # 파일에 저장되어 있는 표를 읽어 DataFrame으로 만듦
+    df = pd.read_csv("data/boston_housing.csv").head(10) 
     return df
 
 bool_value = st.checkbox("**표를 보시겠습니까?**") # check: True, check 해제: False 반환
@@ -88,7 +92,7 @@ col4, col5 = st.columns(2)
 
 uploaded_file = col4.file_uploader(
     "이미지 업로드", 
-    type=["png", "jpg"],           # 업로드 파일 확장자 제한. (생략하면 모든 확장자의 파일을 다 업로드 할 수있다.)
+    type=["png", "jpg"],           # 업로드 파일 확장자 제한. ('생략하면 모든 확장자'의 파일을 다 업로드 할 수있다.)
     accept_multiple_files=False    # True 설정 시 한번에 여러개 파일 업로드 가능.
 )
 
@@ -102,7 +106,7 @@ os.makedirs(save_dir, exist_ok=True)
 if uploaded_file is not None:
     # UploadFile.getvalue(): 업로드된 파일을 bytes로 반환
     # UploadFile.name      : 업로드된 파일이름 반환.
-    bytes_data = uploaded_file.getvalue()
+    bytes_data = uploaded_file.getvalue() # 업로드된 파일 가져오기
     save_filepath = os.path.join(save_dir, uploaded_file.name)
     with open(save_filepath, "wb") as fw:
         fw.write(bytes_data)
@@ -132,7 +136,7 @@ with open(down_filepath, "rb") as fr:
     st.download_button(
         "파일 다운로드",                             # Button Label
         data=fr.read(),                             # 다운로드 시킬 파일 content. (str or bytes)
-        file_name=os.path.basename(down_filepath),  # 다운 로드 될때 파일명 (경로일 경우)
+        file_name=os.path.basename(down_filepath),  # 다운 로드 될때 파일명 (경로일 경우 파일명만 오도록) ( = "파일명" 으로 파일명 설정 가능)
     )
 
 

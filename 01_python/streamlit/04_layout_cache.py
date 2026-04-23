@@ -8,7 +8,8 @@ st.set_page_config(page_title="Layout&Cache", layout="wide")
 # 행을 여러 열로 나눠서 출력한다.
 # st.columns(나눌 개수)
 ##################################################
-
+st.title("타이틀")
+st.subheader("서브헤더")
 
 col1, col2 = st.columns(2)
 # print(type(col1))
@@ -43,7 +44,7 @@ col4.metric(label="일본JPY(100엔)", value="958.63 원", delta="-7.44 원")
 # @st.cache_data
 #   - data를 반환하는 함수에 사용
 #   - 파이썬 value, DataFrame
-# @st.cache.resource
+# @st.cache_resource
 #   - resource를 반환하는 함수에 사용
 #   - 머신러닝/딥러닝 모델, Database 연결등
 #  
@@ -51,7 +52,8 @@ col4.metric(label="일본JPY(100엔)", value="958.63 원", delta="-7.44 원")
 #########################################################
 
 # DataFrame 데이터를 제공하는 함수.
-@st.cache_data
+# @(데코레이터) : 함수에만 붙여줄 수 있음(코드에는 못 붙임)
+@st.cache_data # 한 번 읽어오면 메모리에 어딘가 저장해두어서 두 번째부터는 메모리에서 꺼내와 속도 줄임(get_data() 호출 x)
 def get_data():
     print("get_data")
     df = pd.read_csv("data/boston_housing.csv")
@@ -59,7 +61,7 @@ def get_data():
 
 
 st.divider()
-data = get_data()
+data = get_data() # '같은 데이터(바뀌지 않는 데이터)'임에도 event가 발생될 때마다 불러와짐(불러오는데 1분이 걸리는 파일이라면?) => @st.cache_data 사용
 st.title("보스톤 지역 주거지역 정보")
 btn = st.button("정보 조회")
 if btn:

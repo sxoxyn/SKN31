@@ -4,7 +4,7 @@ st.title("Page 링크")
 st.markdown(
 """
 # 기본 방식
-- 프로젝트 폴더 아래 pages 디렉토리를 생성하고, 그 아래에 페이지를 저장한다. (예: `pages/page1.py`, `pages/page2.py`)
+- '프로젝트 폴더 아래 pages 디렉토리'를 생성하고, 그 아래에 페이지를 저장한다. (예: `pages/page1.py`, `pages/page2.py`)
 - sidebar에 페이지 링크가 자동으로 생성된다.
 
 # 명시적으로 페이지가 나오도록 처리
@@ -13,6 +13,7 @@ st.markdown(
 """
 )
 st.subheader("링크")
+# page_link : home&pages 아래에 있는 파일들만 가능
 st.page_link("06_paging.py", label="Home", icon='🏠')
 st.page_link("pages/page1.py", label="Page 1", icon='👍')
 st.page_link("pages/page2.py", label="Page 2")
