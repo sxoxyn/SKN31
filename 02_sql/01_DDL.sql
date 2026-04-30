@@ -47,7 +47,7 @@ grant all privileges on *.* to 'playdata'@'%';
 
 -- user 권환 조회
 show grants for 'playdata'@'localhost';
-show grants for 'playdata'@'%';
+show grants for 'pla ydata'@'%';
 
 
 /*****************************************

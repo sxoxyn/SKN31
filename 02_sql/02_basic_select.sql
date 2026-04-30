@@ -203,7 +203,7 @@ order by를 이용한 정렬
 		
 문자열 오름차순 : 특수문자 -> 숫자 -> 대문자 -> 소문자 -> 한글 (유니코드 순서)
 Date 오름차순 : 과거 -> 미래
-null은 오름차순일 때 가장 먼저 나온다.
+'null'은 '오름차순일 때 가장 먼저' 나온다.
 
 ex)
 order by salary asc, emp_id desc
@@ -220,11 +220,12 @@ order by emp_id desc;
 select emp_id, emp_name, job, salary
 from emp
 order by job asc, salary desc;
-
+-- = order by 3 asc, 4desc; select 절의 컬럼 순번 사용 가능(1부터 시작)
+ 
 -- 급여(salary)가 $5,000을 넘는 직원의 ID(emp_id), 이름(emp_name), 급여(salary)를 급여가 높은 순서부터 조회
 select emp_id, emp_name, salary
 from emp
 where salary > 5000
-order by salary desc;
+order by salary desc; -- order by 3 desc;
 
 
