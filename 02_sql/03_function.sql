@@ -57,7 +57,7 @@ from emp;
  abs(값): 절대값 반환
  round(값, 자릿수): 자릿수이하에서 반올림 (양수 - 실수부, 음수 - 정수부, 기본값: 0-0이하에서 반올림이므로 정수로 반올림)
  truncate(값, 자릿수): 자릿수이하에서 절삭-버림(자릿수: 양수 - 실수부, 음수 - 정수부, 기본값: 0)
- ceil(값): 값보다 큰 정수중 가장 작은 정수. 소숫점 이하 올린다.
+ ceil(값): 값보다 큰 정수중 가장 작은 정수. 소숫점 이하 올린다. 
  floor(값): 값보다 작은 정수중 가장 작은 정수. 소숫점 이하를 버린다. 내림
  sign(값): 숫자 n의 부호를 정수로 반환(1-양수, 0, -1-음수)
  mod(n1, n2): n1 % n2
@@ -258,7 +258,7 @@ select  dept_name,
         case dept_name when 'IT' then salary * 0.1
 					   when 'Shipping' then salary * 0.2
                        when 'Finance' then salary * 0.3
-                       else 0  
+                       else 0 
 		end "급여 인상분"
 from    emp;        
 
