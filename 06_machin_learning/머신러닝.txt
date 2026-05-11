@@ -1,0 +1,6 @@
+머신러닝 - 과거의 dataset의 패턴 찾아 그 패턴을 가지고 미래 data 결과 예측하는 모델
+방대한 양의 data를 인간이 처리하기 힘들어 컴퓨터에 맡김
+scikit-learn - numpy의 ndarray 라이브러리로 사용
+머신러닝 알고리즘 - 딥러닝 / 이외 알고리즘( 라이브러리 사용)
+딥러닝 라이브러리 - pytorch / tensorflow
+머신러닝 라이브러리들은 dataset 타입을 ndarray 타입으로 받고 처리
