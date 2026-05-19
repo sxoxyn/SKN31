@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import (confusion_matrix, ConfusionMatrixDisplay, 
                              recall_score, precision_score, f1_score, accuracy_score,
                              PrecisionRecallDisplay, average_precision_score, precision_recall_curve,
-                             RocCurveDisplay, roc_auc_score, roc_curve)
+                             RocCurveDisplay, roc_auc_score, roc_curve,
+                             mean_squared_error, root_mean_squared_error, r2_score)
+                             
 
 __version__ = 1.1
 
@@ -93,3 +95,17 @@ def print_binary_classification_metrics(y, pred, proba=None, title=None):
     if proba is not None:
         print("Average Precision:", average_precision_score(y, proba))
         print("ROC-AUC Score:", roc_auc_score(y, proba))
+
+def print_regression_metrcis(y, pred, title=None):
+    """회귀 평가지표를 출력하는 함수
+    Args:
+        y: ndarray - 정답 
+        pred: ndarray - 모델 추정값
+        title: 결과에 대한 제목. default: None
+    Returns:
+    Raises:"""
+    if title:
+        print(title)
+    print("MSE:", mean_squared_error(y, pred))
+    print("RMSE:", root_mean_squared_error(y, pred))
+    print("R Squared:", r2_score(y, pred))
