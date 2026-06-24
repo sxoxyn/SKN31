@@ -210,3 +210,4 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 08_NLP/data/petitions/petitions_corpus.txt
+10_AI_Agent/cache.sqlite
