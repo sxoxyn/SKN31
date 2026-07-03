@@ -81,7 +81,7 @@ CREATE CONSTRAINT movie_title_year_unique
 FOR (m:Movie)
 REQUIRE (m.title, m.year) IS UNIQUE;
 ```
-- 이 경우 ``(title, year)` 조합이 유일해야 한다.
+- 이 경우 ``(title, year)`` 조합이 유일해야 한다.
 
 ### 제약조건 예
 
