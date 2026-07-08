@@ -1,0 +1,14 @@
+Python 3.14 주요 변경 사항 요약
+
+- 언어/문법: 주석(annotation) 지연 평가(PEP 649/749), 템플릿 문자열(t-strings, PEP 750), except/except*에서 괄호 생략(PEP 758), finally 블록에서의 제어 흐름에 대한 경고(PEP 765) 등 문법·동작 변화가 있다.
+- 인터프리터: 표준 라이브러리에서 서브인터프리터를 지원하는 concurrent.interpreters가 추가되었고, 멀티 인터프리터 실행을 위한 InterpreterPoolExecutor도 생겼다. 새 tail-call 기반 인터프리터와 자유 스레드(free-threaded) 모드 개선도 포함된다.
+- 디버깅/관찰성: 안전한 외부 디버거 인터페이스(PEP 768), pdb의 원격 연결, asyncio 프로세스의 호출 그래프/태스크 구조를 살펴보는 도구가 추가되었다.
+- 표준 라이브러리: compression.zstd와 compression 패키지, annotationlib, string.templatelib 등 새 모듈이 추가되었다. asyncio, pathlib, uuid, typing, unittest, argparse, http, json, os, tarfile 등 다수 모듈에 기능이 확장되었다.
+- 성능 개선: 여러 모듈 import 속도와 실행 성능이 개선되었고, 일부 파일/문자열/UUID 관련 기능은 더 빨라졌다. zlib는 Windows에서 zlib-ng를 사용한다.
+- 에러 메시지 개선: 키워드 오타, 잘못된 문자열/타입, async with 사용 오류 등에서 더 구체적인 SyntaxError/TypeError 메시지를 제공한다.
+- 보안/안정성: tarfile의 추출 필터 강화, configparser의 안전한 쓰기 제한, os.path.realpath의 새로운 strict 옵션 등 안전성 관련 변화가 있다.
+- 빌드/배포: build-details.json이 추가되었고, 공식 릴리스의 PGP 서명은 중단되었다. free-threaded Python은 공식 지원으로 전환되었으며, macOS/Windows 배포판에는 실험적 JIT가 포함된다.
+- C API: Python 초기화/설정용 새 C API(PEP 741), 다양한 새/변경된 공개 C API, 제한 C API 조정, 일부 오래된 C API 제거·비권장화가 이뤄졌다.
+- 마이그레이션 주의: multiprocessing의 기본 시작 방식이 Unix에서 forkserver로 바뀌는 등, annotations, gc, typing.Union, regex, subprocess 관련 코드가 영향을 받을 수 있으니 Porting to Python 3.14 문서를 확인하는 것이 좋다.
+
+한 줄 요약: Python 3.14는 주석 처리 방식의 큰 변화, 템플릿 문자열, 서브인터프리터/자유 스레드/디버깅 개선, Zstandard 지원, 다양한 표준 라이브러리 확장과 성능·보안 개선이 핵심입니다.
