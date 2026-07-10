@@ -63,7 +63,7 @@ def build_system_prompt(
     if profile:
         parts.append(
             "\n## 사용자 프로필\n"
-            + json.dumps(profile, ensure_ascii=False, indent=2)
+            + json.dumps(profile, ensure_ascii=False, indent=2) # json.dumps(): dict -> str
         )
     if preference:
         parts.append(
@@ -80,7 +80,7 @@ def build_system_prompt(
     )
     return "\n".join(parts)
 
-
+# graph.invoke(["messages": (query), config={configurable}]) => {configurable}이 RunnableConfig로 들어감
 def load_context(state: State, config: RunnableConfig) -> dict:
     """진입 노드: 
     profile, preference 를 읽어 시스템 프롬프트를 만든다.
@@ -91,10 +91,11 @@ def load_context(state: State, config: RunnableConfig) -> dict:
     주의) user_id는 원래 현재 대화중인 사용자의 id를 사용해야 한다.
     """
     user_id = config["configurable"]["user_id"]
-    store = get_store()
+    store = get_store() # SqliteStore 조회
 
     profile_item = store.get(profile_namespace(user_id), PROFILE_KEY)
     pref_item = store.get(preferences_namespace(user_id), PREFERENCE_KEY)
+    # 조회된 것이 있다면 item에서 value만 조회
     profile = profile_item.value if profile_item else None
     preference = pref_item.value if pref_item else None
 
@@ -107,6 +108,7 @@ def agent(state: State) -> dict:
 
     시스템 프롬프트는 state["messages"] 에 누적하지 않고 호출 시에만 앞에 붙여 체크포인터에 중복 저장되지 않게 된다.
     """
+    # = ("system", state.get("system_prompt", ""))
     messages = [SystemMessage(content=state.get("system_prompt", ""))] + state["messages"]
     response = _llm_with_tools.invoke(messages)
     return {"messages": [response]}
@@ -120,14 +122,16 @@ def build_graph(store: BaseStore, checkpointer: BaseCheckpointSaver):
         checkpointer: 단기 기억 체크포인터 (스레드별 대화 상태 저장).
     """
     builder = StateGraph(State)
-    builder.add_node("load_context", load_context)
+    builder.add_node("load_context", load_context) # 사용자의 중요한 정보 미리 알아두도록
     builder.add_node("agent", agent)
     builder.add_node("tools", ToolNode(TOOLS))
 
     builder.add_edge(START, "load_context")
     builder.add_edge("load_context", "agent")
     
-    builder.add_conditional_edges("agent", tools_condition)
+    # tools_condition: "tools" -> ToolNode 호출, context -> "__end__" 호출
+    # Path map 생략하면 router가 반환한 식별자가 이름인 노드 호출
+    builder.add_conditional_edges("agent", tools_condition) 
     builder.add_edge("tools", "agent")
 
     return builder.compile(store=store, checkpointer=checkpointer)

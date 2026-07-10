@@ -90,7 +90,7 @@ def save_preference(
     namespace = preferences_namespace(user_id)
 
     # 기존 선호를 읽어 부분 갱신(merge)한다.
-    existing = store.get(namespace, PREFERENCE_KEY)
+    existing = store.get(namespace, PREFERENCE_KEY) # key 값 가져올 때는 get
     current = dict(existing.value) if existing else {}
     if tone is not None:
         current["tone"] = tone

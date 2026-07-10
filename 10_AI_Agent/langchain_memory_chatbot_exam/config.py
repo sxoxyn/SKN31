@@ -14,7 +14,8 @@ EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
 EMBEDDING_DIMS = 1536
 
 # --- 경로 설정 ---
-BASE_DIR = Path(__file__).resolve().parent # 프로젝트 root 경로
+BASE_DIR = Path(__file__).resolve().parent # 프로젝트 root 경로(resolve(): 절대 경로로 알려줌)
+# Path(__file__).resolve(): config.py 파일의 경로
 
 ## 장단기 메모리 Database 파일 경로
 DATABASE_DIR = BASE_DIR / "database"

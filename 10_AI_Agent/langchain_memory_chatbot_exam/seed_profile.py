@@ -18,8 +18,8 @@ USERS = [
     {
         "user_id": DEFAULT_USER_ID,  # "demo_user"
         "profile": {
-            "name": <<본인 정보>>,
-            "job":  <<본인 정보>>,
+            "name": "전서연",
+            "job":  "AI 개발자",
             "language": "Korean",
             "timezone": "Asia/Seoul",
         },
@@ -62,7 +62,7 @@ def seed() -> None:
             preferences_namespace(user_id),
             PREFERENCE_KEY,
             user["preference"],
-            index=False,
+            index=False, # embedding 됐더라도 index 지정 안 하도록
         )
         print(f"  - 시드: {user_id} ({user['profile']['name']})")
 

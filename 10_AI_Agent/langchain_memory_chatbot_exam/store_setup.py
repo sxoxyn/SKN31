@@ -1,4 +1,4 @@
-"""SQLite 기반 장기 기억(Store), 단기 기억(Checkpointer) 생성 모듈.
+"""SQLite 기반 장기 기억(Store), 단기 기억(Checkpointer) 생성 모듈.(연결 설정)
 
 - 장기 기억: `SqliteStore`. memories 의 의미 기반 검색을 위해 임베딩 `index` 를 설정한다.
 - 단기 기억: `SqliteSaver`(체크포인터). 스레드별 대화 상태(단기 메모리)를 저장한다.
