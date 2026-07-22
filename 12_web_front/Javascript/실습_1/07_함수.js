@@ -13,13 +13,14 @@
   ---------------------------------------------
 */
 {
-  function add(a, b) {
-    return a + b;
-  }
+  // 함수 정의
+  // function add(a, b) {
+  //   return a + b;
+  // }
+  // // 함수 호출
+  // const result = add(10, 20);
 
-  const result = add(10, 20);
-
-  console.log(result); // 30
+  // console.log(result); // 30
 }
 
 /*
@@ -49,28 +50,29 @@
   // const add = (a, b) => {
   //   return a + b;
   // };
+  // console.log(add(200, 300));
 }
 /* - (a, b) => { ... }는 화살표 함수이고, 생성된 함수 객체를 add 변수에 저장 */
 
-/* 함수 본문이 하나의 표현식이면 중괄호와 return을 생략할 수 있다. */
+/* 함수 '본문이 하나의 표현식'이면 '중괄호와 return을 생략'할 수 있다. */
 {
   // const add = (a, b) => a + b;
 }
 
-/* 매개변수가 하나이면 괄호를 생략할 수 있다. */
+/* '매개변수가 하나'이면 '괄호를 생략'할 수 있다. */
 {
   // const double = number => number * 2;
 }
 
-/* 매개변수가 없으면 빈 괄호(필수)를 작성한다. */
+/* '매개변수가 없'으면 '빈 괄호(필수)를 작성'한다. */
 {
   // const greet = () => console.log("안녕하세요.");
 }
 
-/* 객체를 바로 반환할 때는 객체를 괄호로 감싼다. */
+/* '객체를 바로 반환'할 때는 '객체를 괄호로' 감싼다. */
 {
   // const createUser = (name, age) => ({
-  //   name,
+  //   name, // name:name - key와 값을 가진 변수가 같으면 key만 지정
   //   age,
   // });
 }
@@ -100,6 +102,8 @@
 */
 {
   // function sum(...numbers) {
+  // function sum(a, b, c, ...numbers) {
+  //   consol.log(a, b, c);
   //   console.log(numbers);
   // }
 

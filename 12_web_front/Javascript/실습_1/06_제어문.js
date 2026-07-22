@@ -18,23 +18,25 @@
   조건은 위에서 아래 순서대로 검사하며, 처음으로 true가 된 블록만 실행하고 나머지는 검사하지 않는다.
 */
 {
-  const score = 85;
+  // const score = 85;
 
-  if (score >= 90) {
-    console.log("A");
-  } else if (score >= 80) {
-    console.log("B");
-  } else {
-    console.log("C");
-  }
+  // if (score >= 90) {
+  //   console.log("A");
+  // } else if (score >= 80) {
+  //   console.log("B");
+  // } else {
+  //   console.log("C");
+  // }
 }
 
 /* 조건식에는 비교식뿐 아니라 모든 값이 올 수 있다. */
 {
   // const userName = "홍길동";
-
+  // console.log(Boolean(userName));
   // if (userName) {
   //   console.log("이름이 입력되었습니다.");
+  // } else{
+  //   console.log("이름을 입력하세요.")  
   // }
 }
 
@@ -109,9 +111,17 @@
 /*
   [for 문]
   반복 횟수가 분명할 때 주로 사용한다.
+  
+  for (초기식 ; 조건식 ; 증감식) {반복 구문}
+  초기식 -> 조건식=true -> 반복 구문 -> 증감식
+         -> 조건식=true -> 반복 구문 -> 증감식
+         -> 조건식=false -> 종료 
 */
-for (let i = 0; i < 5; i++) {
-  // console.log(i);
+// for (let i = 0; i < 5; i++) {
+//   console.log(i);
+// }
+for (let i=0, j=5; i<5 && j>0; i++, j--){
+  console.log(i, j);
 }
 
 /*
@@ -119,6 +129,10 @@ for (let i = 0; i < 5; i++) {
   조건이 참인 동안 반복한다.
 */
 {
+  // while(true){
+  //   console.log("hello");
+  // }
+
   // let count = 0;
 
   // while (count < 5) {
@@ -170,6 +184,8 @@ for (let i = 0; i < 5; i++) {
   //   name: "홍길동",
   //   age: 20,
   // };
+  
+  // console.log(user.name, user["name"])
 
   // for (const key in user) {
   //   console.log(key, user[key]);
@@ -180,19 +196,19 @@ for (let i = 0; i < 5; i++) {
   [break와 continue]
   break는 반복문을 즉시 종료한다.
 */
-for (let i = 0; i < 10; i++) {
-  // if (i === 3) {
-  //   break;
-  // }
+// for (let i = 0; i < 10; i++) {
+//   if (i === 3) {
+//     break;
+//   }
 
-  // console.log(i);
-}
+//   console.log(i);
+// }
 
 /* continue는 현재 반복을 건너뛰고 다음 반복을 실행한다. */
-for (let i = 0; i < 10; i++) {
-  // if (i % 3 === 0) {
-  //   continue;
-  // }
+// for (let i = 0; i < 10; i++) {
+//   if (i % 3 === 0) {
+//     continue;
+//   }
 
-  // console.log(i);
-}
+//   console.log(i);
+// }

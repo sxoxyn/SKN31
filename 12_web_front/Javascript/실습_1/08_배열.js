@@ -17,6 +17,7 @@ const fruits = ["사과", "배", "포도"];
 */
 // console.log(fruits[0]); // "사과"
 // console.log(fruits[1]); // "배"
+// console.log(fruits[5]); // 없는 index: undefined
 
 // fruits[0] = '참외';
 // console.log(fruits);
@@ -40,9 +41,7 @@ const fruits = ["사과", "배", "포도"];
 */
 {
   // const numbers = [1, 2];
-
   // numbers.push(3);
-
   // console.log(numbers); // [1, 2, 3]
 }
 
@@ -56,6 +55,7 @@ const fruits = ["사과", "배", "포도"];
 
   // console.log(removed); // 3
   // console.log(numbers); // [1, 2]
+  // console.log(numbers[numbes.length-1]) // 마지막 인덱스 조회
 }
 
 /*
