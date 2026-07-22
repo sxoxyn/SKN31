@@ -11,13 +11,13 @@
   ---------------------------------------------
 */
 {
-  const colors = ["red", "green", "blue"];
+  // const colors = ["red", "green", "blue"];
 
-  const [first, second, third] = colors;
+  // const [first, second, third] = colors;
 
-  console.log(first);  // "red"
-  console.log(second); // "green"
-  console.log(third); // "blue"
+  // console.log(first);  // "red"
+  // console.log(second); // "green"
+  // console.log(third); // "blue"
 }
 
 /* 일부 값은 건너뛸 수 있다. */

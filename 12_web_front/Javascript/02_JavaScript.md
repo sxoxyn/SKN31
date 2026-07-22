@@ -46,7 +46,11 @@ button.addEventListener("click", event => {
   console.log(event.type);
   console.log(event.target);
   console.log(event.currentTarget);
-});
+}); 
+// 버튼이 클릭되면 이벤트가 발생되는 것을 웹브라우저에게 전달
+// 이벤트가 발생되는 것 기다리고 확인(이벤트 핸들러가 발생하도록 관리) 'EventListener'
+// 이벤트 정보를 'add'
+// 이벤트 소스?
 ```
 
 - `event.type`: 발생한 이벤트 이름을 문자열로 반환한다.
@@ -102,7 +106,7 @@ form.addEventListener("submit", event => {
 const userList = document.querySelector("#userList");
 
 userList.addEventListener("click", event => {
-  const item = event.target.closest("li");
+  const item = event.target.closest("li"); // 상위 li 찾아감
 
   if (!item) {
     return;
@@ -240,7 +244,7 @@ const container = document.querySelector("#container");
 container.innerHTML = "<strong>강조된 내용</strong>";
 ```
 
-사용자가 입력한 문자열을 검증 없이 `innerHTML`에 넣으면 악성 스크립트나 이벤트 속성이 실행되는 XSS 보안 문제가 생길 수 있다.
+사용자가 입력한 문자열을 검증 없이 `innerHTML`에 넣으면 악성 스크립트나 이벤트 속성이 실행되는 'XSS 보안 문제'가 생길 수 있다.
 
 ```javascript
 container.innerHTML = userInput; // 사용에 주의
@@ -334,7 +338,7 @@ element.after(newElement);
 - `기준요소.before(노드)`는 기준 요소의 바로 앞에 형제 노드로 삽입한다.
 - `기준요소.after(노드)`는 기준 요소의 바로 뒤에 형제 노드로 삽입한다.
 
-이미 DOM에 들어 있는 같은 Node를 다른 위치에 삽입하면 복사본이 생기는 것이 아니라 기존 위치에서 새 위치로 이동한다. 같은 모양의 요소가 여러 개 필요하면 각각 생성하거나 `cloneNode()`로 복제해야 한다.
+이미 DOM에 들어 있는 같은 Node를 다른 위치에 삽입하면 복사본이 생기는 것이 아니라 기존 위치에서 새 위치로 이동한다. 같은 모양의 요소가 여러 개 필요하면 각각 생성하거나 `cloneNode()`로 복제해야 한다.(유지하면서 똑같은 요소 복사)
 
 ## 17.9 요소 삭제
 

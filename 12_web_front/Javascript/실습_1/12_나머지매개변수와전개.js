@@ -12,13 +12,13 @@
   함수에 전달된 여러 값을 배열로 모은다.
 */
 {
-  function sum(first, second, ...rest) {
-    console.log(first);
-    console.log(second);
-    console.log(rest);
-  }
+  // function sum(first, second, ...rest) {
+  //   console.log(first);
+  //   console.log(second);
+  //   console.log(rest);
+  // }
 
-  sum(10, 20, 30, 40, 50);
+  // sum(10, 20, 30, 40, 50);
 }
 /*
   나머지 매개변수는 마지막 매개변수에 한 번만 사용할 수 있다.

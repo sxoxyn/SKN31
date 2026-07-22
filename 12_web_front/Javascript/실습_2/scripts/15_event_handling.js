@@ -18,7 +18,7 @@ function showEventInfo(event) {
   console.log("이벤트 이름(event.type):", event.type);
   console.log("이벤트가 시작된 요소(event.target):", event.target);
   console.log("처리 함수가 등록된 요소(event.currentTarget):", event.currentTarget);
-
+;
   eventInfoResult.textContent = `이벤트 이름: ${event.type} / 발생 한 소스 노드: ${event.target.tagName}`;
 }
 
@@ -44,6 +44,7 @@ function handleFormSubmit(event) {
   submitResult.textContent = `제출된 메시지: ${messageInput.value}`;
   console.log("폼 제출을 JavaScript에서 처리했습니다. 메시지:", messageInput.value);
 }
+// 이벤트 핸들러.. current..에서 썼는데 그 위에서도 실행된다.?...
 
 // 15.5 이벤트 전파(이벤트 위임)
 const userList = document.querySelector("#user-list");

@@ -3,7 +3,7 @@ const selectOneButton = document.querySelector("#select-one-button");
 
 function selectSingleElements() {
   const title = document.querySelector("h3");            // 태그 선택자
-  const paragraph = document.querySelector("#target-paragraph"); // 아이디 선택자
+  const paragraph = document.querySelector("#target-paragraph"); // 아이디 선택자(모든 target-paragraph. 앞에 * 생략)
   const firstItem = document.querySelector(".item");     // 클래스 선택자
 
   console.log("태그 선택자(h3)로 찾은 요소:", title);
@@ -21,7 +21,7 @@ const selectAllResult = document.querySelector("#select-all-result");
 
 function selectAllFruits() {
   const fruits = document.querySelectorAll(".fruit");
-
+  // [li, li, li]
   console.log("찾은 요소 개수(length):", fruits.length);
 
   fruits.forEach(fruit => {
@@ -37,14 +37,14 @@ const nodelistCheckButton = document.querySelector("#nodelist-check-button");
 function checkNodeListType() {
   const fruits = document.querySelectorAll(".fruit");
 
-  console.log("NodeList가 배열인가?", Array.isArray(fruits)); // false
+  console.log("NodeList가 배열인가?", Array.isArray(fruits)); // false(NodeList)
 
   // 전개 구문으로 NodeList를 새 배열로 변환한다.
   const fruitArray = [...fruits];
 
   console.log("변환한 결과가 배열인가?", Array.isArray(fruitArray)); // true
 
-  // 배열이 되면 map() 같은 배열 메서드를 사용할 수 있다.
+  // 배열이 되면 map() 같은 배열 메서드를 사용할 수 있다.(배열이 아니면 map 사용 불가)
   const fruitNames = fruitArray.map(fruit => fruit.textContent);
   console.log("과일 이름 배열:", fruitNames);
 }

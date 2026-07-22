@@ -67,8 +67,11 @@ function removeAppleItem() {
   console.log("remove()로 사과 항목을 삭제했습니다.");
 }
 
-function removeAllItem() {
+function removeAllItem() { 
 
+  // ElementNode.hasChildNodes(): 자식노드가 있는지 여부
+  // ElementNode.firstChild/lastChild : 첫번째/마지막 자식 노드 객체를 반환
+  // ElementNode.parentNode : 부모 노드 반환
   while (fruitList.hasChildNodes()) {
       // 부모노드.removeChild(삭제할 자식노드);
       fruitList.removeChild(fruitList.firstChild);
@@ -89,9 +92,9 @@ function replaceOldParagraph() {
     return;
   }
 
-  const newElement = document.createElement("p");
-  const strongElement = document.createElement("strong")
-  newElement.append(strongElement)
+  const newElement = document.createElement("p"); // <p></p>
+  const strongElement = document.createElement("strong") // <sgring></string>
+  newElement.append(strongElement) // <p><string></string><p/>
 
   strongElement.textContent = "교체된 새 요소(p strong)";
   oldParagraph.replaceWith(newElement);
