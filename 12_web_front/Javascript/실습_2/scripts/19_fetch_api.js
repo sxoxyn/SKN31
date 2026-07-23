@@ -17,15 +17,15 @@ async function fetchUsers() {
     throw new Error(`HTTP 오류: ${response.status}`);
   }
 
-  return response.json();
+  return response.json(); // json(문자열) -> JavaScript Object
 }
 
 async function loadUsers() {
   getStatus.textContent = "불러오는 중...";
-  userList.innerHTML = "";
+  userList.innerHTML = ""; // 기존 목록(<ul>) 비우기
 
   try {
-    const users = await fetchUsers();
+    const users = await fetchUsers(); // [user, user, ...]
 
     users.forEach(user => {
       const item = document.createElement("li");
@@ -80,6 +80,11 @@ async function createPost(post) {
     },
     body: JSON.stringify(post), // 객체를 JSON 문자열로 변환
   });
+
+  // const formNode = document.querySelector("#input-form"); // <form>
+  // const formData = FormData(formNode);
+  // fetch(URL, {method: "post", body: formData})
+  // 입력 값들이 요청 파라미터로 전송
 
   if (!response.ok) {
     throw new Error(`HTTP 오류: ${response.status}`);

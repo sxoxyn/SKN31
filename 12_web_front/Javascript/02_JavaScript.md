@@ -461,13 +461,13 @@ const data = Object.fromEntries(formData.entries());
 console.log(data);
 ```
 
-같은 이름의 값이 여러 개이면 일반 객체의 키 하나에 모두 담을 수 없으므로, 위 변환에서는 마지막 값만 남을 수 있다. 여러 개의 체크박스처럼 같은 이름을 가진 값을 모두 가져올 때는 `getAll()`을 사용한다.
+같은 이름의 값이 여러 개이면 일반 객체의 키 하나에 모두 담을 수 없으므로, 위 변환에서는 마지막 값만 남을 수 있다. 여러 개의 체크박스처럼 '같은 이름을 가진 값'을 모두 가져올 때는 '`getAll()`'을 사용한다.
 
 ```javascript
 const hobbies = formData.getAll("hobby");
 ```
 
-`getAll(이름)`은 같은 이름으로 등록된 모든 값을 배열로 반환하며, 값이 없으면 빈 배열을 반환한다.
+`getAll(이름)`은 같은 이름으로 등록된 모든 값을 '배열로 반환'하며, '값이 없으면 빈 배열'을 반환한다.
 
 ## 18.3 폼 요소 접근
 
@@ -553,7 +553,7 @@ Fetch API는 브라우저에서 서버로 HTTP 요청을 보내고 응답을 비
 
 ## 19.1 GET 요청
 
-`fetch(주소)`는 별도의 옵션이 없으면 GET 방식으로 요청을 보내며, `await`를 사용하면 Promise가 처리될 때까지 현재 비동기 함수의 실행을 기다렸다가 `Response` 객체를 얻는다. JSON 본문은 `response.json()`으로 읽으며 이 메서드도 Promise를 반환하므로 `await`가 필요하다.
+`fetch(주소)`는 별도의 옵션이 없으면 GET 방식으로 요청을 보내며, '`await`'를 사용하면'Promise가 처리될 때까지' '현재 비동기 함수의 실행을 기다렸'다가 '`Response` 객체를 얻'는다. JSON 본문은 `response.json()`으로 읽으며 이 메서드도 Promise를 반환하므로 `await`가 필요하다.
 
 ```javascript
 async function fetchUsers() {
@@ -562,9 +562,12 @@ async function fetchUsers() {
 
   console.log(users);
 }
+// Promise: 끝나면 다음 것을 실행할 수 있게 함
+// await: 끝날 때까지 대기하고 있음. 이게 없으면 해당 행이 끝나기 전에 아래 행이 실행되게 됨
 ```
 
-`async`로 선언한 함수는 항상 Promise를 반환한다. 따라서 `fetchUsers()`의 완료 결과를 사용하려면 호출하는 쪽에서도 `await` 또는 `then()`을 사용해야 한다.
+'`async`'로 선언한 함수는 '항상 Promise를 반환'한다. 따라서 `fetchUsers()`의 완료 결과를 사용하려면 '호출하는 쪽에서도 `await` 또는 `then()`'을 사용해야 한다.  
+
 
 ## 19.2 HTTP 상태 확인
 
@@ -652,11 +655,11 @@ createUser(newUser)
 | `response.ok` | 상태 코드가 200~299 범위인지 불리언 값으로 나타냄 |
 | `response.status` | HTTP 상태 코드를 숫자로 반환 |
 | `response.headers` | 응답 헤더를 다루는 `Headers` 객체를 반환 |
-| `response.json()` | JSON 응답을 JavaScript 값으로 변환하는 Promise를 반환 |
-| `response.text()` | 응답 본문을 문자열로 변환하는 Promise를 반환 |
-| `response.blob()` | 파일이나 이미지 본문을 `Blob`으로 변환하는 Promise를 반환 |
+| `response.json()` | 'JSON 응답을 JavaScript 값으로 변환하는 Promise'를 반환 |
+| `response.text()` | 응답 본문을 '문자열로' 변환하는 Promise를 반환 |
+| `response.blob()` | '파일이나 이미지' 본문을 `Blob`으로 변환하는 Promise를 반환 |
 
-응답 본문은 스트림이므로 일반적으로 한 번만 읽을 수 있다. 같은 `Response`에서 `json()`을 호출한 뒤 다시 `text()`를 호출하면 본문이 이미 사용되어 오류가 발생한다.
+응답 본문은 스트림이므로 일반적으로 '한 번만 읽을 수 있'다. 같은 `Response`에서 `json()`을 호출한 뒤 다시 `text()`를 호출하면 본문이 이미 사용되어 오류가 발생한다.
 
 ---
 
