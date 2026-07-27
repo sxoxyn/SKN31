@@ -15,8 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from polls import views
+# path(): url과 view 연결하는 설정
+# include(): url과 urls.py(app별로 정의한)를 연결하는 설정
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), # admin 앞에 port 번호 생략된 것(ex. admin_app으로 설정 시 /admin_app으로 검색해야 주소 연결됨)
+    path('polls/', include('polls.urls')), # polls: url이 polls로 시작하면 나머지는 polls/urls.py를 참조해라
+
+    # 파라미터 1: url, 2: 함수, name="설정이름"(필수) ----> urls.py가 하나만 있을 시
+    # path('polls/welcome', views.welcome_polls, name="polls_welcome"), # http://127.0.0.1:8000/polls/welcome -> welcome_polls() 호출
+    # ----> urls.py가 하나만 있을 시
 ]
