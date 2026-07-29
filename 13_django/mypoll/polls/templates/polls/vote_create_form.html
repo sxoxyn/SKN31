@@ -1,0 +1,89 @@
+<!-- templates/polls/vote_create_form.html -->
+{% extends "layout/main_layout.html" %}
+{% block title %}질문 등록 - form{% endblock title %}
+{% block contents %}
+<h1>설문 문제 등록 - form 이용</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ c_formset.management_form }}
+        {% comment %}
+            c_formset.management_form 출력: formset을 이용할 경우 반드시 출력 필요
+            <input type="hidden">으로 FormSet이 생성한 태그들에 대한 정보 생성
+                -> 이 값이 넘어가야 View에서 입력된 값들을 처리 가능
+                # 생성하는 값
+                 - TOTAL_FORMS: formset이 관리하는 입력 개수(ex. 설정값 2개인데 보기 2개 추가해 작성해도 그 값은 적용 안 됨)
+                 - INITIAL_FORMS: 처음 생성한 입력 개수(원래 있던 값을 가지고 있으면서 생성되는 input -수정 관련)
+                 - MIN_NUM_FORMS: 최소 허용 입력 개수
+                 - MAX_NUM_FORMS: 최대 허용 입력 개수
+        {% endcomment %}
+    
+    <h3>질문</h3>
+        {# context value로 넘어온 Form객체 출력 -> 입력 폼 생성 #}
+        {{q_form}}
+    <h3>보기</h3>
+        <div id="choice-layer" class="mt-3">
+            <!-- formset: form들의 집합 -> for in문 실행 시 form 반환 -->
+            <!-- input 이름: prefix(form)-index-Field이름 (ex. form-0-choice_text)(페이지 소스에서 확인 가능) -->
+            {% for c_form in c_formset %}
+                {{c_form}}
+            {% endfor %}
+        </div>
+        <div id="btn-layer" class="mt-3">
+            <button type="submit" class="btn btn-primary">등록</button>
+            <button type="reset" class="btn btn-primary">초기화</button>
+            <button type="button" id="choice-add-btn" class="btn btn-info">보기 추가</button>
+            <button type="button" id="choice-del-btn" class="btn btn-info">보기 삭제</button>
+        </div>
+
+</form>
+{% endblock contents %}
+{% block javascript %}
+<script>
+    const add_btn = document.querySelector("#choice-add-btn")
+    const del_btn = document.querySelector("#choice-del-btn")
+    // 보기 추가 버튼 event 처리
+    add_btn.addEventListener("click", () => {
+        // input[name$='choice_text']: input 태그 중, name 속성 값이 choice_text로 끝나는 것
+        // =: 일치, ^=: 시작, *=: 포함, $=: 끝나는 것
+        const choice_text_cnt = document.querySelectorAll("input[name$='choice_text']").length
+        const choice_text_input_name = `form-${choice_text_cnt}-choice_text`
+
+        const div = document.createElement("div");       // <div></div>
+        const input = document.createElement("input");   // <input>
+        input.setAttribute("type", "text");  // <input type="text">
+        input.setAttribute("name", choice_text_input_name); 
+        input.setAttribute("id", `id_${choice_text_input_name}`);
+        input.setAttribute("required", true);                 
+
+        // class: form-control 추가
+        input.classList.add('form-control');
+
+        div.append(input); // <div><input...></div>
+        document.querySelector("#choice-layer").append(div); // 생성한 div를 choice layer에 추가
+
+        // TOTAL_FORMS의 value 1 증가
+        const totalForms = document.querySelector("#id_form-TOTAL_FORMS");
+        totalForms.value = parseInt(totalForms.value) + 1;
+    });
+
+    // 보기 삭제 버튼 event 처리
+    del_btn.addEventListener("click", () => {
+        // 보기 input 하나 삭제
+        // 보기 input은 최소 두 개 유지(두 개 이하일 경우 삭제 X)
+        const choice_layer = document.querySelector("#choice-layer");
+        // Node.children: 자식 노드들을 nodelist로 반환
+        if (choice_layer.children.length > 2) {
+            // 부모노드.lastChild - 마지막 자식노드 반환
+            // 부모노드.removeChild(삭제할 자식노드)
+            choice_layer.removeChild(choice_layer.lastElementChild);
+
+            // TOTAL_FORMS의 value 1 감소
+            const totalForms = document.querySelector("#id_form-TOTAL_FORMS");
+            totalForms.value = parseInt(totalForms.value) - 1;
+        } else {
+            // 경고창(alert("메시지"))
+            alert("보기는 세 개 이상일 경우만 삭제할 수 있습니다.")
+        }
+    });
+</script>
+{% endblock javascript %}
