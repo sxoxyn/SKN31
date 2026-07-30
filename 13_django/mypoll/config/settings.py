@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls',
+    'account',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -111,6 +113,13 @@ USE_I18N = True
 
 USE_TZ = True
 
+# 기본 User Model 등록
+AUTH_USER_MODEL = 'account.CustomUser'
+
+# login하지 않은 사용자가 @login_required view를 요청했을 때 이동할 url 경로(login 화면)
+# ex) http://127.0.0.1:8000/polls/vote_create 요청(로그인이 안 된 상태)
+# -이동-> http://127.0.0.1:8000/account/login?next=/polls/vote_create
+LOGIN_URL = "/account/login"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/

@@ -4,6 +4,10 @@ from django.http import HttpResponse # 응답 헤더
 from django.db import transaction
 from django.core.paginator import Paginator
 
+from django.contrib.auth.decorators import login_required
+# 로그인 해야지만 처리할 수 있는 view 함수에 붙이는 decorator.
+# 로그인이 안 된 상태로 요청이 들어오면 로그인 화면으로 이동(이동할 URL은 settings.py에 LOGIN_URL 변수에 설정)시킴
+
 from datetime import datetime
 # 모델 클래스 import
 from .models import Question, Choice
@@ -299,6 +303,7 @@ def vote_create_old(request):
 #########################
 from .forms import QuestionForm, ChoiceFormSet, ChoiceForm
 
+@login_required
 def vote_create(request):
     if request.method == "GET":
         # 응답화면 반환
