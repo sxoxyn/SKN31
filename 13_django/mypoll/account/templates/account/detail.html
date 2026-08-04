@@ -23,10 +23,27 @@
         <td>{{user.birthday}}</td>
     </tr>
 </table>
+
+{% if user.profile_img %}
+<div>
+    <img src="{{user.profile_img.url}}">
+</div>
+{% endif %}
+
+{% if user.upfile %}
+<div>
+    <a href="{{user.upfile.url}}">{{user.upfile}}</a>
+</div>
+{% endif %}
+
+<!-- {{user.upfile}} <br>
+{{user.profile_img.url}} <br>
+{{user.upfile.url}} -->
+
 <div class="mt-5">
     <a href="{% url 'account:update' %}" class="btn btn-primary">수정</a>
     <a href="{% url 'account:password_change' %}" class="btn btn-primary">패스워드 변경</a>
-    <a href="" class="btn btn-danger">탈퇴</a>
+    <a href="{% url 'account:delete' %}" class="btn btn-danger" onclick="return confirm('정말 탈퇴하시겠습니까?')">탈퇴</a>
 </div>
 
 {% endblock contents %}

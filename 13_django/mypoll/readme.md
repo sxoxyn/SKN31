@@ -85,3 +85,30 @@
     - ModelForm 생성시 Model을 지정하고 어떤 Field들을 Form에 넣을지 선택.
         - save()메소드를 제공 -> insert와 update를 Model을 거치지 않고 할 수 있다.
 
+# static 파일 저장
+- app디렉토리 아래 `static` 디렉토리를 만들고 그 아래 저장하면 장고 서버(WSGI)가 인식
+    - 보통 `static/app이름` 디렉토리에 저장
+    - 이미지: `img`, `images`
+    - Javascript: `js`
+    - CSS: `css`
+- `polls/static/polls` 생성
+    - 하위에 `images`, `js`
+    - 다운받은 이미지를 `images`에 복사
+    - `script.js`를 `js`아래 생성 
+- `settings.py`에 `STATIC_URL = "/static/"` 설정
+    - static 파일을 client가 요청할 때 사용할 url
+    - ex. `polls/static/polls/images/servey.png` 
+        `<img src="/static/polls/images/survey.png>`
+        - app/static => /static/
+
+# 파일 업로드
+- 업로드 파일 저장할 디렉토리: `ROOT/media` 생성
+- `settings.py` 설정
+    - `MEDIA_ROOT = BASE_DIR / media`: 업로드 파일 저장될 디렉토리
+    - `MEDIA_URL - "/media/"`: 업로드된 파일 요청할 시작 URL
+        - `/media/a/b/c.exe`: MEDIA_ROOT 디렉토리 아래 `a/b/c.exe` 파일 전달
+
+- ImageField 사용하기 위해 pillow 설치
+    - `uv pip install pillow`
+
+

@@ -17,6 +17,28 @@ class CustomUser(AbstractUser):
         verbose_name="생일", # Form 관련 설정
     )
 
+    # 프로필 사진
+    profile_img = models.ImageField(
+        verbose_name="프로필 사진",
+        null=True,
+        blank=True,
+        upload_to="images/profile",
+        # MEDIA_ROOT 디렉토리 아래 저장할 경로 지정
+    )
+
+    # 일반 파일 - 저장 디렉토리를 '날짜별로 생성'
+    upfile = models.FileField(
+        verbose_name="업로드 파일",
+        null=True,
+        blank=True,
+        upload_to="upfile/%Y/%M/%d"
+        # media/upfile/2026/07/31 파일
+    )
+
+    # 모델 변경 -> DB에 적용
+    # python manage.py makemigrations
+    # python manage.py migrate
+
     def __str__(self):
         return f"{self.pk}. {self.username}-{self.name}" # 1. myid-홍길동
 

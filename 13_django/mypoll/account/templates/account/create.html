@@ -6,8 +6,12 @@
 
 {% block contents %}
 <h1>가입</h1>
-<form method="post">
+<!-- 파일 업로드가 있는 form: enctype 설정 -->
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    <!-- <input type="file" name="f1"><br>
+    <input type="file" name="f2"><br>
+    <input type="file" name="f3" class="form-control"> -->
 
     {#{form}#}
     {% bootstrap_form  form %}
